@@ -1,0 +1,6 @@
+# Settings personales de Claude Code (permisos por persona, no se comparten)
+.claude/settings.local.json
+
+# Sistema operativo
+.DS_Store
+Thumbs.db
