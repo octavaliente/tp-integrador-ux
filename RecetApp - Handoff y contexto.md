@@ -139,6 +139,7 @@ Ruta: `D:\...\TP Integrador UX\`
 - **planKey (team):** `team::1361136318383520599`.
 - **Páginas:** Portada `0:1` · Foundations `15:2` · UI Kit `15:3` · Pantallas `15:4`.
 - **Nodos clave:** Button set `16:26` · Input set `17:23` · Chip set `20:12` · Card de receta `22:2` · Iconografía frame `21:2` · Foundations container `24:2` · Plantilla iPhone 15 `23:2`.
+- **Agregados en Fase 4:** `icon/carrot` `54:23` · `icon/basket` `54:30` · Card de receta · compacta `55:16` · Pantalla **Home** `56:2`.
 
 ---
 
@@ -154,7 +155,7 @@ Ruta: `D:\...\TP Integrador UX\`
 - **Fase 0 — Previos:** nombre ✓, paleta ✓, tipografía ✓.
 - **Fase 2 — UX Research:** ✓ ya hecha en la materia (insumo para fundamentación/presentación).
 - **Fase 3 — Sistema visual + UI Kit en Figma:** ✅ **COMPLETA** (ver §11).
-- **Fase 4 — Diseño de pantallas con Claude:** generar las vistas del sitemap aplicando leyes UX y patrones, con justificación → salida iterable (PDF). ← **PRÓXIMO PASO**
+- **Fase 4 — Diseño de pantallas con Claude:** generar las vistas del sitemap aplicando leyes UX y patrones, con justificación. ← **EN CURSO.** Hecho: **Home** (`56:2`). Justificaciones en [`docs/justificaciones-ux.md`](docs/justificaciones-ux.md). Pendientes: Recetas · Detalle de receta · Planificación · Perfil · Ingredientes · Notificaciones.
 - **Fase 5 — Rehacer/pasar a Figma:** maquetar las pantallas finales en Figma usando el design system + plantilla iPhone 15; organizar páginas/capas; chequear AA con STARK.
 - **Fase 6 — Evaluación heurística:** Nielsen, hallazgos y ajustes.
 - **Fase 7 — Documento de fundamentación:** consolidar research + sistema visual + patrones + heurística + evidencias WCAG.
@@ -164,7 +165,9 @@ Ruta: `D:\...\TP Integrador UX\`
 
 ## 11. Estado actual
 
-**Fase 3 terminada en Figma.** El archivo TP-Integrador contiene:
+### Fase 3 — Sistema visual + UI Kit (✅ completa)
+
+El archivo TP-Integrador contiene:
 
 - **Variables:** `Color/Primitivos` (48, con scopes correctos) · `Color/Semanticos` (19, alias) · `Medidas` (16: espaciado 8pt, radios, grilla).
 - **Estilos de texto:** `Texto/*` (8).
@@ -177,7 +180,15 @@ Ruta: `D:\...\TP Integrador UX\`
 - **Foundations (página):** showcase visual de color, tipografía (estilos aplicados), espaciado 8pt y radios.
 - **Pantallas (página):** **Plantilla base iPhone 15 (393×852)** con grilla de 4 columnas, grid de 8pt y zonas guía (header, contenido, tab bar).
 
-**Próximo paso:** arrancar **Fase 4 — diseño de pantallas** (Home, Recetas, Detalle de receta, Planificación, Perfil, Ingredientes, Notificaciones) aplicando leyes UX y patrones, iterando primero como propuestas y luego maquetando en Figma sobre la plantilla y el UI Kit.
+### Fase 4 — Diseño de pantallas (🟡 en curso)
+
+- **Home** (`56:2`, página Pantallas) — **terminada y validada.** Estructura: header (saludo + campana con badge), fila de 4 atajos (Cargar ingrediente, Cargar ticket, Recetas guardadas, Lista de compras), buscador sticky, **"Sugerencias para ti"** en grilla de 2 columnas con scroll infinito, y tab bar de 5 destinos (Home · Recetas · Planificación · Ingredientes · Perfil). Justificación de patrones y accesibilidad en [`docs/justificaciones-ux.md`](docs/justificaciones-ux.md).
+- **Agregados al UI Kit durante la Fase 4:**
+  - `icon/carrot` (`54:23`) y `icon/basket` (`54:30`) — Tabler outline, trazo atado a `text/primary`.
+  - **`Card de receta · compacta`** (`55:16`) — 172px para grillas de 2 columnas; foto + guardar (bookmark), título, tiempo, dificultad, precio.
+- **Decisión de diseño:** se descartó el **FAB** de "agregar ingrediente" porque la acción ya vive en los atajos superiores (evita acceso duplicado).
+
+**Próximo paso:** seguir el sitemap → **Recetas** (reusa la card compacta y la grilla), luego Detalle de receta, Planificación, Perfil, Ingredientes y Notificaciones. Método: validar estructura en el chat → construir en Figma → documentar justificación en `docs/justificaciones-ux.md`.
 
 ---
 

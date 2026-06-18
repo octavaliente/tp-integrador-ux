@@ -16,6 +16,7 @@ importar quién las haga.
 | `.claude/skills/` | Skills del MCP de Figma (cómo usar `use_figma`, design system rules, etc.). |
 | `RecetApp - Handoff y contexto.md` | **Documento principal.** Contexto completo: consigna, sistema de diseño, decisiones, sitemap, reglas de Figma MCP y roadmap. |
 | `docs/contexto-figma.md` | node IDs de Figma, variables y estado de avance actual. |
+| `docs/justificaciones-ux.md` | Fundamentación de las decisiones de diseño (leyes/patrones UX + accesibilidad) por pantalla. |
 | `recetapp_tokens.json` | Design tokens (colores, tipografías, espaciado, radios). |
 | `Sitemap - App recetas.jpg` | Mapa de navegación de la app. |
 | `Clase *.pdf`, `Consigna TP Final.pdf` | Material de cátedra y consigna. |
