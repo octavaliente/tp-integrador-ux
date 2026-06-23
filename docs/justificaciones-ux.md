@@ -111,8 +111,108 @@ Refuerzan continuidad y pertenencia, y hacen la pantalla más cálida (coherente
 
 ---
 
+## Pantalla: Perfil (`112:166`) + subpantallas
+
+**Concepto rector:** Perfil concentra los datos que **personalizan las sugerencias** de la
+app (restricciones, objetivo, actividad, hogar). No es un feed ni un panel de cuenta: es
+una **pantalla de configuración** a la que el usuario vuelve a ajustar valores puntuales.
+Alcance ceñido al sitemap (6 campos); la identidad se muestra pero no es editable y no se
+agregan ajustes de cuenta/app en esta etapa (*consistente con el enunciado del TP*).
+
+### Estructura
+
+**Vista principal** (`112:166`):
+1. **Bloque de identidad** — avatar + nombre + email (solo lectura).
+2. **"Sobre mí"** — Peso y altura · Objetivo nutricional · Actividad deportiva · Restricciones personales.
+3. **"Mi hogar"** — Personas en casa · Restricciones familiares.
+4. **Tab bar** con Perfil activo.
+
+**Subpantallas** (una plantilla por tipo de dato, todas con encabezado *‹ volver + título*):
+- **Restricciones personales** (`112:197`) — lista de **selección múltiple** (checkboxes).
+- **Objetivo nutricional** (`112:221`) — lista de **selección única** (radios).
+- **Peso y altura** (`112:245`) — dos **inputs con unidad** (kg / m).
+- **Personas en casa** (`112:269`) — un **input** numérico.
+- *Actividad deportiva* y *Restricciones familiares* reutilizan exactamente las plantillas
+  de selección única y múltiple respectivamente (se clonan en el maquetado final, Fase 5).
+
+### Decisiones y su justificación
+
+**Lista de ajustes con filas + divisores, no cards.**
+Las 6 opciones son **entradas de navegación a sub-ajustes**, no objetos de contenido
+independientes: el patrón correcto es la *grouped list* (iOS HIG / Material), filas con
+divisor bajo encabezados de sección. Reemplaza la propuesta inicial de 6 cards apiladas,
+que recargaba visualmente y chocaba con la regla del proyecto *"evitar uso excesivo de
+Cards"*.
+→ *Jakob's Law* (los ajustes se ven como ajustes en todas las apps) · *Aesthetic and
+minimalist design* (Nielsen #8). Ver regla transversal **R5**.
+
+**Agrupación "Sobre mí" / "Mi hogar".**
+Los 6 campos se ordenan según el modelo mental **"yo" vs "mi grupo familiar"** — el mismo
+que estructura las restricciones. Reduce la carga de escaneo y da sentido al orden.
+→ *Ley de la región común / agrupación* (Gestalt) · *Miller's Law / chunking*.
+
+**Valor actual como subtítulo.**
+Cada fila muestra el dato vigente ("70 kg · 1,75 m", "Mantener peso") sin necesidad de
+entrar; los vacíos se rotulan "Ninguna" en `text/disabled`.
+→ *Recognition over recall* (Nielsen #6) · reduce profundidad de navegación. Ver **R6**.
+
+**Encabezado de subpantalla fijo (back + título).**
+Toda subpantalla abre con un encabezado de **alto fijo (52)**, botón volver de 32 y título
+`Texto/H3`, idéntico en las cuatro vistas. Da una ruta de regreso siempre predecible.
+→ *Jakob's Law* · *User control and freedom* (Nielsen #3). Ver **R1**.
+
+**Restricciones como selección múltiple desde un catálogo.**
+En vez de una lista editable con "Agregar" + borrar (texto libre), se ofrece un **catálogo
+de restricciones frecuentes** y el usuario **tilda** las que apliquen. Datos consistentes,
+sin errores de tipeo, menos pasos.
+→ *Recognition over recall* · *Error prevention* (Nielsen #5) · *Hick's Law* (decisión guiada).
+
+**El control se elige según el tipo de dato.**
+Selección única (Objetivo, Actividad) → radios; selección múltiple (Restricciones) →
+checkboxes; valores numéricos libres (Peso, altura, Personas) → inputs. Coherencia entre
+forma del control y naturaleza del dato.
+→ *Jakob's Law* · *Consistency and standards* (Nielsen #4).
+
+**Auto-guardado, sin botón "Guardar".**
+Las ediciones se persisten al volver (estándar de ajustes mobile); se quitó el botón
+"Guardar" incluso en Peso y altura, y el stepper de Personas en casa se reemplazó por un
+input para unificar el patrón de edición numérica. Menos fricción y menos UI.
+→ *Reducción de fricción (Tesler)* · *Aesthetic and minimalist design* (Nielsen #8). Ver **R7**.
+
+**Superficies como paneles inset + gutter global de 16.**
+Los paneles blancos no van a sangre: margen lateral 16 + esquinas `radius/lg`, sobre el
+fondo crema. Elimina el corte duro crema↔blanco y unifica el ritmo de toda la app.
+→ *Aesthetic-Usability Effect* · Gestalt (región común). Ver **R3** y **R4**.
+
+### Tabla resumen — leyes y patrones
+
+| Aplicación en Perfil | Ley / patrón |
+|---|---|
+| Lista de ajustes (filas + divisores) en vez de cards | **Jakob's Law** + Nielsen #8 |
+| Agrupación "Sobre mí" / "Mi hogar" | **Gestalt (región común)** + **Miller / chunking** |
+| Valor vigente visible en cada fila | **Recognition over recall** (Nielsen #6) |
+| Catálogo de restricciones tildables (no texto libre) | **Error prevention** (Nielsen #5) + **Hick** |
+| Control según tipo de dato (radio/check/input) | **Consistency & standards** (Nielsen #4) |
+| Encabezado de regreso fijo y consistente | **User control & freedom** (Nielsen #3) |
+| Auto-guardado, sin Guardar | **Reducción de fricción (Tesler)** |
+
+### Accesibilidad (WCAG AA) en Perfil
+
+- **Contraste:** títulos en `text/primary #2E1E12` y valores en `text/secondary #5C4A3A`
+  sobre paneles blancos (AA holgado). Estado seleccionado y tab activa en **calabaza 600
+  `#AF5012`** (≥4.5:1).
+- **No depender solo del color:** los seleccionables combinan color **+ forma e ícono**
+  (checkbox tildado / radio relleno con ✓); la tab activa combina color **+ etiqueta**.
+- **Área táctil:** filas, botón volver (32 + área de fila), ítems de tab bar y filas de
+  selección con objetivo ≥44 px.
+- **Estados vacíos diferenciados** ("Ninguna" en `text/disabled`) — no se confunden con un
+  valor real.
+- **Pendiente de verificación con STARK** al maquetar estados finales (Fase 5).
+
+---
+
 ## Pantallas pendientes
 
 A documentar a medida que se diseñen: **Recetas · Detalle de receta · Planificación ·
-Perfil · Ingredientes · Notificaciones**. Cada una seguirá esta misma estructura
+Ingredientes · Notificaciones**. Cada una seguirá esta misma estructura
 (estructura → decisiones y justificación → tabla de leyes/patrones → accesibilidad).

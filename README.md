@@ -15,6 +15,7 @@ importar quién las haga.
 | `CLAUDE.md` | Instrucciones que Claude Code lee automáticamente al abrir la carpeta. |
 | `.claude/skills/` | Skills del MCP de Figma (cómo usar `use_figma`, design system rules, etc.). |
 | `RecetApp - Handoff y contexto.md` | **Documento principal.** Contexto completo: consigna, sistema de diseño, decisiones, sitemap, reglas de Figma MCP y roadmap. |
+| `docs/roadmap-pantallas.md` | **Roadmap vivo** de todas las vistas a diseñar (Fase 4), por sitemap y con su estado. |
 | `docs/contexto-figma.md` | node IDs de Figma, variables y estado de avance actual. |
 | `docs/justificaciones-ux.md` | Fundamentación de las decisiones de diseño (leyes/patrones UX + accesibilidad) por pantalla. |
 | `recetapp_tokens.json` | Design tokens (colores, tipografías, espaciado, radios). |
