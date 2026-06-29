@@ -38,14 +38,14 @@ Recordatorios de entorno: **rate limit del plan** → agrupar llamadas en Figma;
 | # | Pantalla / vista | Sección sitemap | Estado | node ID |
 |---|---|---|---|---|
 | 1 | **Home** | (raíz) | ✅ | `56:2` |
-| 2 | **Recetas** (lista / guardadas) | Recetas | ⬜ | — |
-| 3 | **Detalle de receta** | Recetas | ⬜ | — |
-| 4 | **Buscar recetas** | Recetas | ⬜ | — |
+| 2 | **Recetas** (Buscar / Mis recetas / Historial) | Recetas | ✅ | `205:1472` |
+| 3 | **Detalle de receta** | Recetas | ✅ | `210:2007` |
+| 4 | **Buscar recetas** (+ Filtros: 2 modos) | Recetas | ✅ | `205:1472` · `208:1976` · `363:16472` |
 | 5 | **Planificación** | Planificación | ⬜ | — |
 | 6 | **Lista de compras** | Planificación | ⬜ | — |
-| 7 | **Ingredientes** (ver / ingresar) | Ingredientes | ⬜ | — |
+| 7 | **Ingredientes** (ver / ingresar) | Ingredientes | ✅ | `163:605` |
 | 8 | **Perfil** (+ 4 subpantallas) | Perfil | ✅ | `112:166` |
-| 9 | **Notificaciones** | (raíz) | ⬜ | — |
+| 9 | **Notificaciones** | (raíz) | ✅ | `292:5478` |
 | 10 | Pantalla **"????"** del sitemap | (raíz) | 🔵 | — |
 
 > Orden sugerido de diseño (por reutilización y dependencias): **Recetas → Detalle → Buscar →
@@ -58,16 +58,19 @@ Recordatorios de entorno: **rate limit del plan** → agrupar llamadas en Figma;
 
 A crear/validar a medida que aparezcan (registrar en `contexto-figma.md`):
 
-- [ ] **Card de receta · ancha** (lista de 1 columna con más metadatos).
+- [x] **Card de receta · ancha** (hero del Detalle) → `204:168` (prop Nombre).
 - [ ] **Ítem de lista de compras** (checkbox + cantidad + ingrediente + precio).
-- [ ] **Stepper / control de porciones** (− 4 +).
-- [ ] **Fila de paso de preparación** (número + texto, estado completado).
-- [ ] **Tabla / fila de info nutricional** (nutriente + valor).
-- [ ] **Toggle / switch** y **selector segmentado** (filtros, restricciones del perfil).
+- [x] **Stepper / control de cantidad** (− N +) → `159:120` (sirve también para porciones del Detalle).
+- [x] **Fila de ingrediente** (set Vista/Edición: miniatura + nombre + cantidad/stepper + tacho) → `161:148`.
+- [x] **Fila de paso de preparación** (número + texto) → inline en Detalle (acordeón Preparación).
+- [x] **Fila de info nutricional** (nutriente + valor) → inline en Detalle (acordeón Nutrición).
+- [x] **Segmented control** (2/3 opciones) → `203:185` / `202:199`. (Toggle/switch aún pendiente.)
+- [x] **Acordeón** (sección colapsable: header título + chevron) → patrón inline en Detalle.
+- [x] **icon/sustituir** (reemplazar ingrediente, flechas de intercambio) → `201:168`.
 - [ ] **Ítem de notificación** (ícono + texto + tiempo + estado leído/no leído).
-- [ ] **Campo de búsqueda con resultados** y **chips de filtro activos**.
-- [ ] **Estados vacíos** (sin ingredientes, sin recetas guardadas, sin notificaciones).
-- [ ] **Encabezado de pantalla interna** (back + título + acción contextual).
+- [x] **Campo de búsqueda** → `159:133`. **Resultado de búsqueda** (fila de candidato `+`/`✓`, reutilizable en Carga manual / Filtros / Carga a lista) → `369:4231` (R18). (Chips de filtro activos en barra de resultados: pendientes.)
+- [ ] **Estados vacíos** (sin ingredientes ✅ `166:801`; faltan sin recetas guardadas, sin notificaciones).
+- [x] **Encabezado de pantalla interna** → reusa `123:27` (back + título); acción contextual ad-hoc (p. ej. "Limpiar" en Filtros).
 
 ---
 
@@ -84,65 +87,63 @@ Sugerencias de recetas según los ingredientes del usuario + atajos. **Terminada
 
 ---
 
-## 2. Recetas (lista / guardadas) ⬜
+## 2. Recetas (Buscar / Mis recetas / Historial) ✅ — `205:1472`
 
-Pestaña "Recetas" de la tab bar. Cubre el feed principal de recetas y la sección de
-**recetas guardadas** e **historial cocinado**.
+Pestaña "Recetas" de la tab bar con **navegación interna por segmented control** (3 secciones).
 
-- [ ] Validar estructura en chat
-- [ ] Construir en Figma
-- [ ] Documentar justificación
-- [ ] Registrar node ID
+- [x] Validar estructura en chat
+- [x] Construir en Figma
+- [x] Documentar justificación → [`justificaciones-ux.md` § Recetas](justificaciones-ux.md#pantalla-recetas-2051472--detalle-filtros)
+- [x] Registrar node ID
 
 **Alcance (del sitemap):**
-- [ ] Listado / grilla de recetas (reutiliza card compacta `55:16` + grilla 2 col).
-- [ ] **Recetas guardadas** (filtro/sección de favoritos).
-- [ ] **Historial cocinado** (recetas ya preparadas).
-- [ ] Acceso a **Guardar receta** (acción de bookmark, ya en la card).
-- [ ] Acceso a **Buscar recetas** (→ pantalla 4) y a **Detalle** (→ pantalla 3).
-- [ ] Entrada a **Añadir receta a planificación** (acción contextual).
+- [x] **Buscar** (tab por defecto) = `205:1472` — buscador + botón de filtros + grilla 2 col con card compacta (`55:16`).
+- [x] **Mis recetas** (guardadas) = `207:1656` — misma grilla 2 col.
+- [x] **Historial cocinado** = `207:1888` — grilla 2 col agrupada por día (Hoy / Ayer / fecha).
+- [x] **Guardar receta** (bookmark en la card).
+- [x] Acceso a **Buscar recetas/Filtros** (→ pantalla 4) y a **Detalle** (→ pantalla 3).
+- [ ] *Añadir receta a planificación* → vive en el Detalle (acción "Planificar" de la card hero).
 
-**A decidir en validación:** ¿tabs internos (Todas / Guardadas / Historial) o filtros? ¿estado vacío?
+**Decisiones validadas:** navegación interna por **segmented control** (no chips), feeds en **2 columnas**, Historial **por día**. La tab bar inferior se mantiene.
 
 ---
 
-## 3. Detalle de receta ⬜
+## 3. Detalle de receta ✅ — `210:2007`
 
-Vista de una receta abierta. Es la pantalla más densa del sitemap.
+Vista de una receta abierta. Subpantalla de **contenido** (push): mantiene la tab bar + encabezado de volver.
 
-- [ ] Validar estructura en chat
-- [ ] Construir en Figma
-- [ ] Documentar justificación
-- [ ] Registrar node ID
+- [x] Validar estructura en chat
+- [x] Construir en Figma
+- [x] Documentar justificación → [`justificaciones-ux.md` § Recetas](justificaciones-ux.md#pantalla-recetas-2051472--detalle-filtros)
+- [x] Registrar node ID
 
 **Alcance (del sitemap):**
-- [ ] **Foto del plato** (hero).
-- [ ] **Dificultad y tiempo** de cocción.
-- [ ] **Precio estimado**.
-- [ ] **Ajustar porciones** (stepper que recalcula cantidades).
-- [ ] **Pasos de preparación** (lista numerada).
-- [ ] **Info nutricional** a nivel receta **y** a nivel ingrediente.
-- [ ] **Reemplazar ingrediente** (sustitución).
-- [ ] Acción **Guardar receta**.
-- [ ] Acción **Añadir a planificación**.
+- [x] **Card hero ancha** (`204:168`): foto + nombre + tiempo/dificultad/precio + **Guardar** + **Añadir a planificación**.
+- [x] **Ajustar porciones** (stepper en el acordeón Ingredientes).
+- [x] **Pasos de preparación** (lista numerada, acordeón Preparación).
+- [x] **Info nutricional por porción** (acordeón Nutrición).
+- [x] **Reemplazar ingrediente** (ícono `sustituir` `201:168` por fila).
+- [x] Acciones **Guardar receta** y **Añadir a planificación** (en la card hero).
 
-**A decidir en validación:** ¿scroll largo único o secciones colapsables / tabs (Ingredientes / Pasos / Nutrición)? ¿cómo se muestra la info nutricional por ingrediente (modal, expandible)?
+**Decisiones validadas:** secciones densas en **acordeones** (default en uso: primera sección abierta, R16; en el archivo de Figma se muestran los 3 desplegados —frame extendido a 393×1193— para documentar todos los componentes). Info nutricional **por porción** (a nivel receta); la nutrición por ingrediente individual queda fuera de alcance por ahora.
 
 ---
 
-## 4. Buscar recetas ⬜
+## 4. Buscar recetas (+ Filtros: 2 modos) ✅ — `205:1472` · `208:1976` · `363:16472`
 
-- [ ] Validar estructura en chat
-- [ ] Construir en Figma
-- [ ] Documentar justificación
-- [ ] Registrar node ID
+- [x] Validar estructura en chat
+- [x] Construir en Figma
+- [x] Documentar justificación → [`justificaciones-ux.md` § Recetas](justificaciones-ux.md#pantalla-recetas-2051472--detalle-filtros)
+- [x] Registrar node ID
 
 **Alcance (del sitemap):**
-- [ ] Búsqueda **por ingredientes** (los que el usuario tiene).
-- [ ] Búsqueda **por filtros**: cantidad (de personas/porciones), restricciones.
-- [ ] Estado de resultados (reutiliza grilla/card) y estado vacío / sin resultados.
+- [x] Buscador (tab **Buscar** de Recetas, `205:1472`) + **botón de filtros** con badge de filtros activos.
+- [x] **Filtros** (subpantalla modal, sin tab bar) · segmented de **modo**: **Por ingredientes / Por características**.
+  - [x] Modo **Por características** (`208:1976`): grupos de chips (Tiempo, Dificultad, Restricciones), **Porciones** con stepper, botón fijo "Aplicar filtros · N recetas".
+  - [x] Modo **Por ingredientes** (`363:16472`): campo de búsqueda + grupo **"Tu despensa"** (chips multi-select) + grupo **"Otros ingredientes"** (chips que se suman por búsqueda). **Búsqueda activa** (overlay con lista de resultados, componente `369:4231`) = `374:11270`.
+- [x] Resultados reutilizan grilla 2 col + card compacta. (Estado vacío / sin resultados: pendiente.)
 
-**A decidir en validación:** ¿búsqueda en pantalla propia o overlay sobre Recetas? ¿chips de filtro activos? relación con el buscador sticky del Home.
+**Decisiones validadas:** los filtros viven en una **subpantalla propia**; selección con **chips sin ✓** (relleno calabaza) dentro de grupos rotulados; **cada modo muestra un set distinto** (atributos vs. ingredientes). **Relabel:** "Por filtros" → "Por características" (nombra por el *input* de cada modo). En "Por ingredientes" se **descartó** el control de *Coincidencia* (no aportaba como filtro) y se usa **"Otros ingredientes"** alimentado por la **búsqueda de ingredientes reutilizable** (componente `369:4231`, R18). Pendiente: chips de filtros activos en la barra de resultados; estado vacío de despensa y de resultados sin match (ver `mejoras-pendientes.md`).
 
 ---
 
@@ -181,25 +182,32 @@ Sub-vista de Planificación; también accesible desde el atajo del Home.
 
 ---
 
-## 7. Ingredientes (ver / ingresar) ⬜
+## 7. Ingredientes (ver / ingresar) ✅ — `163:605`
 
 Pestaña "Ingredientes" de la tab bar. Cubre **ver** la despensa e **ingresar** nuevos.
 
-- [ ] Validar estructura en chat
-- [ ] Construir en Figma
-- [ ] Documentar justificación
-- [ ] Registrar node ID
+- [x] Validar estructura en chat
+- [x] Construir en Figma
+- [x] Documentar justificación → [`justificaciones-ux.md` § Ingredientes](justificaciones-ux.md#pantalla-ingredientes-163605--flujo-de-carga)
+- [x] Registrar node ID
 
 **Alcance (del sitemap):**
-- [ ] **Ver ingredientes** (despensa actual).
-- [ ] **Ingresar ingredientes** por 4 métodos:
-  - [ ] **Foto del ticket**
-  - [ ] **Código de barras**
-  - [ ] **Manual**
-  - [ ] **Por voz**
-- [ ] Estado vacío (sin ingredientes cargados).
+- [x] **Ver ingredientes** (despensa actual) → lista con miniatura + cantidad (`163:605`); **modo edición** con stepper + tacho (`165:663`); **estado vacío** (`166:801`).
+- [x] **Ingresar ingredientes** por 4 métodos:
+  - [x] **Manual** → `167:847` (lista de resultados con el componente reutilizable **Resultado de búsqueda** `369:4231`, R18)
+  - [x] **Por voz** → `168:888`
+  - [x] **Foto del ticket** → `169:898` (misma pantalla que código, overlay variable)
+  - [x] **Código de barras** → variante de `169:898`
+- [x] **Revisar ingredientes** (vista previa de confirmación, convergencia voz/ticket/código) → `169:1050`.
+- [x] Estado vacío (sin ingredientes cargados) → `166:801`.
 
-**A decidir en validación:** ¿los 4 métodos en una hoja de selección (bottom sheet) o pantallas separadas? Relación con los atajos "Cargar ingrediente / Cargar ticket" del Home.
+**Decisiones validadas:** los 4 métodos como **accesos directos** arriba (espejo de los atajos
+del Home, redundancia intencional); **modo edición explícito** (Editar → Listo, auto-guarda);
+voz/ticket/código **convergen en una Vista previa** editable, manual va directo; **una sola
+pantalla de cámara** para ticket y código; quitar ingrediente con **ícono de tacho**.
+
+**Reglas transversales que surgieron acá** (ver [`reglas-transversales.md`](reglas-transversales.md)):
+R11 encabezado de pestaña raíz, R12 captura automática → vista previa, R13 edición de listas por modo explícito.
 
 ---
 
@@ -231,19 +239,24 @@ R7 auto-guardado sin "Guardar".
 
 ---
 
-## 9. Notificaciones ⬜
+## 9. Notificaciones ✅ — `292:5478`
 
-Accesible desde la campana del Home.
+Accesible desde la campana del Home (push · mantiene tab bar, Home activo).
 
-- [ ] Validar estructura en chat
-- [ ] Construir en Figma
-- [ ] Documentar justificación
-- [ ] Registrar node ID
+- [x] Validar estructura en chat
+- [x] Construir en Figma
+- [x] Documentar justificación → [`justificaciones-ux.md` § Notificaciones](justificaciones-ux.md#pantalla-notificaciones-2925478--estados)
+- [x] Registrar node ID
 
-**Alcance:**
-- [ ] Lista de notificaciones (leídas / no leídas).
-- [ ] Tipos: sugerencias, recordatorios de planificación, vencimiento de ingredientes (a definir).
-- [ ] Estado vacío.
+**Alcance (del sitemap):**
+- [x] Lista de notificaciones (filas + divisor + tiempo relativo) = `292:5478`.
+- [x] Tipos: recordatorio de compra, recordatorio de planificación, sugerencia de recetas.
+- [x] **Estado vacío** (✓ + "¡Ninguna novedad por ahora!") = `303:10452`.
+- [x] **Borrar** por swipe (`303:8407` izq / `303:10170` der) + **Deshacer** (snackbar, `303:10647`).
+- [ ] Leído / no leído → pendiente (**M2** en [`mejoras-pendientes.md`](mejoras-pendientes.md#notificaciones-2925478)).
+
+**Regla transversal nueva:** R17 (acciones destructivas con Deshacer). Mejora de accesibilidad
+pendiente: **M1** (alternativa no-gestual al borrado).
 
 ---
 
