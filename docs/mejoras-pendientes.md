@@ -71,4 +71,15 @@
   → `Heurística` Visibilidad del estado (#1) · Ayuda a reponerse de errores (#9) · `Regla` R18.
   **Prioridad: media.**
 
+---
+
+## Sistema Visual / tokens
+
+- ⬜ **M5 · Sincronizar los valores finales de color.**
+  La **paleta definitiva de 6 roles** (texto primario `#2B1B12`, secundario `#6E4631`, terciario/
+  placeholder `#7D6657`, borde/divisor `#9C8674`) debe actualizarse en las **variables de Figma** y en
+  `recetapp_tokens.json`, que aún tienen los valores previos (`#2E1E12`, `#5C4A3A`, `#A69D95`,
+  `#C7C1BC`). El fondo `#FDF4E8` y el acento `#AF5012` no cambian.
+  → consistencia tokens ↔ pantallas (Clase 10). **Prioridad: alta** (afecta todo el archivo).
+
 <!-- A medida que surjan, sumar grupos: Home · Perfil · Planificación · Lista de compras -->

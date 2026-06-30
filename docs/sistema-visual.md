@@ -115,29 +115,35 @@ del sistema** según los modelos mentales del usuario, con los cuatro roles que 
 
 → `Estilo` Paleta primaria (marca) + secundaria (feedback) (Clase 10).
 
-**Distribución con la regla 60-30-10.**
-*Decisión a partir de feedback (proceso).* La primera versión del foundation tenía una paleta
-**demasiado extensa** para una interfaz; la devolución de la cátedra fue que no se podían usar tantos
-colores y sugirió aplicar la **regla 60-30-10** —que la Clase 10 presenta como *"una de las reglas más
-importantes en UI y color"*. Resolución adoptada: las escalas completas (50–900) se conservan como
-**fundamento de tokens** (proveen los matices para hover/pressed/bordes/estados), pero **la interfaz
-en uso se disciplina con 60-30-10**, de modo que el usuario percibe esencialmente **tres
-protagonistas cromáticos**:
+**Distribución con la regla 60-30-10 — paleta definitiva de 6 roles.**
+*Decisión a partir de feedback (proceso, clave para la rúbrica).* La primera versión del foundation
+tenía una paleta **demasiado extensa**; la devolución de la cátedra fue que no se podían usar tantos
+colores y sugirió aplicar la **regla 60-30-10** (Clase 10: *"una de las reglas más importantes en UI y
+color"*). Resolución: las escalas completas (50–900) quedan como **fundamento de tokens**, pero la
+interfaz se **consolidó en 6 roles semánticos** repartidos en 60-30-10 — un set acotado y coherente:
 
-- **60% neutro** — base de la interfaz: fondo crema `bg/page` `#FDF4E8` + superficies blancas
-  `bg/surface` `#FFFFFF`. *"Domina el espacio visual y aporta calma y coherencia."*
-- **30% complementario** — los cálidos de estructura derivados de canela/neutros: textos
-  (`text/primary` `#2E1E12`, `text/secondary` `#5C4A3A`), bordes (`border/default` `#C7C1BC`) y
-  superficies sutiles (`bg/subtle` `#FBF2EC`).
-- **10% acento** — **calabaza 600 `#AF5012`** (`action/default`): botones, estado activo, precio,
-  links. *"El protagonista visual. Llama la atención y guía la acción del usuario."* El **dorado**
-  `#E8B85C` queda como realce muy puntual, siempre con texto oscuro encima.
+| Rol | Hex | Uso | 60/30/10 |
+|---|---|---|---|
+| **Fondo** | `#FDF4E8` | Fondo de todas las pantallas | **60 %** |
+| **Texto primario** | `#2B1B12` | Títulos, nombres de receta, labels | 30 % |
+| **Texto secundario** | `#6E4631` | Descripciones, tiempos, dificultad, subtítulos | 30 % |
+| **Texto terciario / placeholder** | `#7D6657` | Placeholder "Buscar recetas", vacíos ("Ninguna") | 30 % |
+| **Borde / divisor** | `#9C8674` | Bordes de cards/inputs, chips no sel., íconos inactivos | 30 % |
+| **Acento / CTA** | `#AF5012` | Botón principal, chip/tab activo, bookmark, precio, avatar | **10 %** |
 
-La **paleta de feedback** (éxito/error/advertencia/información) queda **fuera del cómputo 60-30-10**:
-son colores **funcionales y transitorios** que aparecen solo cuando el sistema comunica un estado, no
-parte de la estética de base.
+- **60 % Fondo** crema `#FDF4E8`: domina y aporta *"calma y coherencia"*.
+- **30 % neutros cálidos**: los cuatro marrones de texto y estructura (derivados de canela) construyen
+  jerarquía y separan contenido sin competir con el acento.
+- **10 % acento** `#AF5012`: *"el protagonista visual que guía la acción"* (CTA, estado activo, precio).
 
-→ `Estilo` Regla 60-30-10 + tokens como fundamento (Clase 10) · `Ley` von Restorff (el acento aislado se destaca, Clase 9 sl. 30).
+Refinamiento clave: los neutros se llevaron a **marrones cálidos (no grises)**, para que todo viva en
+la familia calabaza & canela y la paleta sea más cohesiva. La **paleta de feedback**
+(éxito/error/advertencia/información) queda **fuera del 60-30-10** (colores funcionales y
+transitorios). *(Los valores definitivos deben sincronizarse en las variables de Figma y en
+[`../recetapp_tokens.json`](../recetapp_tokens.json), que aún tienen los valores previos — ver M5 en
+[`mejoras-pendientes.md`](mejoras-pendientes.md#sistema-visual--tokens).)*
+
+→ `Estilo` Regla 60-30-10 · paleta consolidada por feedback (Clase 10) · `Ley` von Restorff (acento aislado, Clase 9 sl. 30) · `Heurística` Consistencia y estándares (#4).
 
 **Color tokenizado (primitivos + semánticos).**
 La Clase 10 advierte que el color *"puede salirse de control… docenas de valores usados de manera
@@ -146,13 +152,23 @@ por **alias semánticos** (`action/default`, `text/primary`, `feedback/error`…
 **cambia en todos lados** —la promesa de consistencia "a escala" del sistema de diseño.
 → `Estilo` Tokens de diseño contra la inconsistencia (Clase 10) · `Regla` variables `Color/Semanticos`.
 
-**Accesibilidad del color (decisión dura, WCAG 1.4.3 AA).**
-El acento se fijó en **calabaza 600 `#AF5012`** y **no** en el 500 `#C75A12`: el 500 da **4.29:1**
-con blanco (**< 4.5, no pasa** AA texto normal) y el 600 sí lo supera. El **warning** se oscureció a
-`#8A5708` por el mismo motivo (el `#B5710A` original daba 3.94). Los textos `text/primary` y
-`text/secondary` superan AA holgado sobre crema/blanco. El **dorado** nunca lleva texto blanco
-(todas sus variantes fallan): solo texto oscuro.
-→ `A11y` 1.4.3 Contraste mínimo 4.5:1 (Clase 4 sl. 20) · `Regla` R9.
+**Accesibilidad del color — evidencia WCAG AA (verificada por cálculo).**
+Toda la paleta definitiva pasa AA sobre el fondo crema `#FDF4E8`:
+
+| Par sobre fondo `#FDF4E8` | Ratio | Umbral | |
+|---|---|---|---|
+| Texto primario `#2B1B12` | **15,2:1** | 4,5 (texto) | ✓ |
+| Texto secundario `#6E4631` | **7,5:1** | 4,5 (texto) | ✓ |
+| Texto terciario / placeholder `#7D6657` | **4,9:1** | 4,5 (texto) | ✓ |
+| Borde / divisor `#9C8674` | **3,2:1** | 3,0 (no textual) | ✓ |
+| Acento `#AF5012` (precio/texto) | **4,9:1** | 4,5 (texto) | ✓ |
+| Blanco sobre acento `#AF5012` (botón) | **5,3:1** | 4,5 (texto) | ✓ |
+
+Decisiones duras detrás de los valores: el acento se fijó en **calabaza 600 `#AF5012`** (el 500
+`#C75A12` daba 4,29:1 con blanco, **no** pasa); incluso el **placeholder** terciario llega a 4,9:1
+(supera AA de texto normal, donde muchas paletas fallan); el **dorado** de realce nunca lleva texto
+blanco, solo oscuro. Verificación final con **STARK** en Fase 5.
+→ `A11y` 1.4.3 Contraste mínimo 4,5:1 · 1.4.11 Contraste no textual 3:1 (Clase 4 sl. 20) · `Regla` R9.
 
 **No depender solo del color (WCAG 1.4.1 A).**
 El color nunca comunica estado por sí solo: se combina con **forma, ícono o etiqueta** (tab activa =
